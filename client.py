@@ -29,7 +29,10 @@ def main():
         msg_str = np.fromstring(recv_msg, np.uint8)
         img_decode = cv2.imdecode(msg_str, cv2.IMREAD_COLOR)
         
-        cv2.imshow('Client', img_decode)
+        cv2.namedWindow("client", 0)
+        cv2.resizeWindow("client", 600, 600)
+        cv2.imshow('client', img_decode)
+        
         cv2.waitKey()
         cv2.destroyAllWindows()
 
