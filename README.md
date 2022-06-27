@@ -1,5 +1,5 @@
 # river_remote  
-server：被控制端
+server：被控制端  
 client：控制端
 
 ### 开发日志
