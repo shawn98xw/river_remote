@@ -20,11 +20,12 @@ def main():
 
     # t = threading.Thread(target = receive_screen, args = (server,))
     # t.start()
+    # 在主线程中接收服务器屏幕内容
     while True:
-        # recv_msg = server.recv(102400)
-
-        f = open("out.txt", 'rb')
-        recv_msg = f.read()
+        recv_msg = server.recv(102400)
+        # TODO 分包
+        # f = open("out.txt", 'rb')
+        # recv_msg = f.read()
 
         msg_str = np.fromstring(recv_msg, np.uint8)
         img_decode = cv2.imdecode(msg_str, cv2.IMREAD_COLOR)
