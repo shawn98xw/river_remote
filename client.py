@@ -1,4 +1,5 @@
 # 客户端
+from curses import window
 from inspect import ArgSpec
 import socket
 import threading
@@ -20,22 +21,32 @@ def main():
 
     # t = threading.Thread(target = receive_screen, args = (server,))
     # t.start()
+
+    recv_bytes = bytes()
+    header_size = 12
+
     # 在主线程中接收服务器屏幕内容
     while True:
-        recv_msg = server.recv(102400)
+        # recv_msg = server.recv(102400)
         # TODO 分包
         # f = open("out.txt", 'rb')
         # recv_msg = f.read()
 
-        msg_str = np.fromstring(recv_msg, np.uint8)
+        recv_bytes += server.recv(102400)
+        if len(recv_bytes) == 0:
+            continue
+        len_bytes = int(recv_bytes[:header_size])
+        if len(recv_bytes) - header_size < len_bytes:
+            continue
+        msg_str = np.frombuffer(recv_bytes[header_size : header_size + len_bytes], np.uint8)
         img_decode = cv2.imdecode(msg_str, cv2.IMREAD_COLOR)
-        
-        cv2.namedWindow("client", 0)
-        cv2.resizeWindow("client", 600, 600)
+        recv_bytes = recv_bytes[header_size + len_bytes:]
+
+        cv2.namedWindow('client', 0)
+        cv2.resizeWindow('client', 600, 600)
         cv2.imshow('client', img_decode)
-        
-        cv2.waitKey()
-        cv2.destroyAllWindows()
+        # cv2.waitKey()
+        # cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()

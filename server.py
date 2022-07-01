@@ -7,6 +7,7 @@ import os
 from PIL import ImageGrab
 from pynput.mouse import Button, Controller
 
+# 发送屏幕内容
 def send_screen(client):
     img_quality = 25; # 图像质量
     encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), img_quality]
@@ -16,14 +17,13 @@ def send_screen(client):
         img_cv = cv2.resize(img_cv, (1535, 863))
         img_encode = cv2.imencode(".jpg", img_cv, encode_param)[1]
         data_encode = np.array(img_encode)
-        str_encode = data_encode.tostring()
+        str_encode = data_encode.tobytes()
         print(f"str_encode len = {len(str_encode)}")
         
-        f = open("out.txt", 'wb')
-        f.write(str_encode)
+        # f = open("out.txt", 'wb')
+        # f.write(str_encode)
 
-        client.send(str_encode)
-        break
+        client.send(str(len(str_encode)).zfill(12).encode('utf-8') + str_encode)
 
 def main():
     listen = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
