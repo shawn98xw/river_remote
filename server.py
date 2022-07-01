@@ -14,7 +14,7 @@ def send_screen(client):
     while True:
         img = ImageGrab.grab(bbox = (0, 0, 1000, 1000))
         img_cv = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR) # 转为opencv的BGR格式
-        img_cv = cv2.resize(img_cv, (1535, 863))
+        img_cv = cv2.resize(img_cv, (1000, 1000))
         img_encode = cv2.imencode(".jpg", img_cv, encode_param)[1]
         data_encode = np.array(img_encode)
         str_encode = data_encode.tobytes()

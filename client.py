@@ -32,7 +32,7 @@ def main():
         # f = open("out.txt", 'rb')
         # recv_msg = f.read()
 
-        recv_bytes += server.recv(102400)
+        recv_bytes += server.recv(1024)
         if len(recv_bytes) == 0:
             continue
         len_bytes = int(recv_bytes[:header_size])
@@ -43,8 +43,12 @@ def main():
         recv_bytes = recv_bytes[header_size + len_bytes:]
 
         cv2.namedWindow('client', 0)
-        cv2.resizeWindow('client', 600, 600)
+        cv2.resizeWindow('client', 500, 500)
+        # cv2.startWindowThread()
         cv2.imshow('client', img_decode)
+
+        if cv2.waitKey(1) & 0xff == ord('q'):
+            break
         # cv2.waitKey()
         # cv2.destroyAllWindows()
 
