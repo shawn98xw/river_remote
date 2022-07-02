@@ -47,7 +47,7 @@ def main():
         # cv2.startWindowThread()
         cv2.imshow('client', img_decode)
 
-        if cv2.waitKey(1) & 0xff == ord('q'):
+        if cv2.waitKey(100) & 0xff == ord('q'):
             break
         # cv2.waitKey()
         # cv2.destroyAllWindows()

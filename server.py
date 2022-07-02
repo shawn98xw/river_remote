@@ -6,6 +6,7 @@ import cv2
 import os
 from PIL import ImageGrab
 from pynput.mouse import Button, Controller
+import pyautogui
 
 # 发送屏幕内容
 def send_screen(client):
@@ -19,13 +20,11 @@ def send_screen(client):
         data_encode = np.array(img_encode)
         str_encode = data_encode.tobytes()
         print(f"str_encode len = {len(str_encode)}")
-        
-        # f = open("out.txt", 'wb')
-        # f.write(str_encode)
 
         client.send(str(len(str_encode)).zfill(12).encode('utf-8') + str_encode)
 
 def main():
+    print(f'screen size = {pyautogui.size()}')
     listen = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     host = '0.0.0.0'
     port = 2052
