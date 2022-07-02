@@ -1,6 +1,7 @@
 # river_remote  
 server：被控制端  
-client：控制端
+client：控制端  
+This project create a video streaming using Python OpenCV and Socket Programming.  
 
 ## 开发日志
 ### 2022-07-01 v0.2

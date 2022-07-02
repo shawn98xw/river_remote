@@ -1,4 +1,4 @@
-# 客户端
+# Local
 from curses import window
 from inspect import ArgSpec
 import socket
@@ -50,7 +50,7 @@ def main():
         if cv2.waitKey(100) & 0xff == ord('q'):
             break
         # cv2.waitKey()
-        # cv2.destroyAllWindows()
+    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()
