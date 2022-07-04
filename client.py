@@ -1,5 +1,4 @@
 # Local
-from curses import window
 from inspect import ArgSpec
 import socket
 import threading
